@@ -1,0 +1,45 @@
+# Build Systems #
+######################
+/bootstrap/compiled.php
+/vendors
+/non_bower_component
+/node_modules
+/bower_components
+/build
+composer.phar
+composer.lock
+.DS_Store
+Thumbs.db
+node_modules
+.idea
+.dev.php
+/nbproject/private/
+/semantic
+semantic.json
+.sass-cache
+*.css.map
+
+
+
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+
+

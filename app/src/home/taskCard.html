@@ -1,0 +1,30 @@
+<div  style="padding: 3px 5px;"  flex="100" >
+
+	<div layout="row">
+		<span style="font-weight: 400">
+		<md-icon class="material-icons" style="font-size:17px;">
+				dashboard
+			</md-icon>
+			{{ task.title | limitTo:30 }}{{ (task.title.length > 36) ? "..." : ''}}
+		</span>
+		<span flex ></span>
+		<div ng-repeat="assignee in task.assignee track by $index" >
+			<div class="userDets" layout="row" layout-align="center center" style="margin:0px;" ng-if="$index < 3" >
+				<img style="border-radius: 50%;height:25px;" ng-src="{{assignee.profilePic}}" title="{{assignee.displayName}}" />
+			</div>
+		</div>
+
+	</div>
+	<div layout="row"  analytics-on="click" analytics-event="Task" analytics-properties="{ action: 'details', id: task.id , name: task.title  }">
+
+		<small>{{task.description | limitTo: 30}}</small>
+		<span flex></span>
+		<span title="Due date" class="custom-label">
+		<md-icon title="Highest - priority" ng-if="details.iconName != '' " class="make-item-primary-color md-seTheme-theme material-icons" style="font-size:17px;">
+				alarm
+			</md-icon>
+			<small>{{task.dueDate | date: $root.dateFormat}}</small>
+		</span>
+	</div>
+	
+</div>

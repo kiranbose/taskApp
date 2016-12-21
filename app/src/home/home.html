@@ -1,0 +1,106 @@
+
+<div layout="column" flex ng-if="! isLoading" style="overflow-y: hidden;" >
+
+<!--    <div ng-include="'src/platform_modules/tasks/views/partials/_task_filter_chips.html'"></div>-->
+    <div class="taskDraggable taskListContainer" layout="row" layout-padding layout-margin layout-fill>
+        <div class="taskList" layout="column" flex="20" ui-tree id="taskList.assigned-root">
+            <div class="taskListToolbar">
+                <span class="toolTitle">To Do</span>
+            </div>
+            <div  class="tree-container" ui-tree-nodes="" ng-model="taskList.assigned">
+                <md-card class="taskCardDraggable taskListCard pick btn btn-info btn-draggable" ng-mouseover="clearNewStat(task)" ng-repeat="task in (taskList.assigned | filter:{title: searchTaskTitle}) track by $index " ng-class="{newTaskCard: task.isNew}" style="font-size:12px;" ng-show="task.title" ui-tree-node ui-tree-handle ng-hide="task.hide">
+                    <md-card-content style="padding:2px !important;">
+                        <ng-include src="'./src/home/taskCard.html'"> </ng-include>
+                    </md-card-content>
+                </md-card>
+                <div layout="column" ng-if="(taskList.assigned).length == 0">
+                    <div class="taskNoState" layout="column" layout-align="center center">
+                        <md-icon>info_outline</md-icon>
+                        <p>	No Tasks Here </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="taskList" layout="column" flex="20"  id="taskList.started-root" >
+            <div class="taskListToolbar">
+                <span class="toolTitle">In progress</span>
+            </div>
+            <div ui-tree>
+                <div class="tree-container"  ui-tree-nodes="" ng-model="taskList.started">
+                <md-card class="taskCardDraggable taskListCard pick btn btn-info btn-draggable"  ng-repeat="task in (taskList.started) track by $index "   ng-class="{newTaskCard: task.isNew}" style="font-size:12px;" ng-show="task.title"  ui-tree-node ui-tree-handle ng-hide="task.hide">
+                    <md-card-content style="padding:2px !important;">
+                       <ng-include src="'./src/home/taskCard.html'"> </ng-include>
+                    </md-card-content>
+                </md-card>
+                <div layout="column" ng-if="(taskList.started).length == 0">
+                    <div class="taskNoState" layout="column" layout-align="center center">
+                        <md-icon>info_outline</md-icon>
+                        <p>	No Tasks Here </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+
+        <div class="taskList" layout="column" flex="20"  ui-tree id="taskList.waiting-root" >
+            <div class="taskListToolbar">
+                <span class="toolTitle">Waiting for approval</span>
+            </div>
+            <div class="tree-container" ui-tree-nodes="" ng-model="taskList.waiting">
+                <md-card class="taskCardDraggable taskListCard  pick btn btn-info btn-draggable"  ng-repeat="task in (taskList.waiting) track by $index " style="font-size:12px;"  ng-show="task.title"  ui-tree-node ui-tree-handle ng-hide="task.hide">
+                    <md-card-content style="padding:2px !important;">
+                        <ng-include src="'./src/home/taskCard.html'"> </ng-include>
+                    </md-card-content>
+                </md-card>
+                <div layout="column" ng-if="(taskList.waiting).length == 0">
+                    <div class="taskNoState" layout="column" layout-align="center center">
+                        <md-icon> info_outline</md-icon>
+                        <p>	No Tasks Here </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="taskList" layout="column" flex="20" ui-tree id="taskList.delegated-root">
+            <div class="taskListToolbar">
+                <span  class="toolTitle"> Delegated </span>
+            </div>
+            <div class="tree-container"  ui-tree-nodes="" ng-model="taskList.delegated">
+                <md-card class="taskListCard delegatedCards pick"   ng-repeat="task in (taskList.delegated) track by $index " style="font-size:12px;"  ui-tree-node ui-tree-handle ng-hide="task.hide">
+
+                    <md-card-content style="padding:2px !important;">
+                        <ng-include src="'./src/home/taskCard.html'"> </ng-include>
+                    </md-card-content>
+                </md-card>
+                <div layout="column" ng-if="(taskList.delegated).length == 0">
+                    <div class="taskNoState" layout="column" layout-align="center center">
+                        <md-icon> info_outline</md-icon>
+                        <p>	No Tasks Here  </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="taskList" layout="column" flex="20"  ui-tree id="taskList.completed-root">
+            <div class="taskListToolbar">
+                <span class="toolTitle">Completed  </span>
+            </div>
+            <div class="tree-container" ui-tree-nodes="" ng-model="taskList.completed">
+                <md-card class="taskListCard pick btn btn-info btn-draggable" ng-repeat="task in (taskList.completed) track by $index" style="font-size:12px;background-color:lightgreen;"  ui-tree-node ui-tree-handle ng-hide="task.hide">
+                    <md-card-content style="padding:2px !important;">
+                       <ng-include src="'./src/home/taskCard.html'"> </ng-include>
+                    </md-card-content>
+                </md-card>
+                <div layout="column" ng-if="(taskList.completed).length == 0">
+                    <div class="taskNoState" layout="column" layout-align="center center">
+                        <md-icon> info_outline</md-icon>
+                        <p>	No Tasks Here </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

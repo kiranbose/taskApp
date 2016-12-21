@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="main" ng-strict-di>
+
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/vendor.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+    <link rel='shortcut icon' type='image/x-icon' href='http://i.imgur.com/VlHYHXH.png' />
+    <title>WeavedIn</title>
+</head>
+
+<body>
+    <!-- App Toolbar-->
+    <md-toolbar class=" md-whiteframe-z2">
+        <div layout="column" tabindex="-1">
+            <div class="md-toolbar-tools" ng-controller="mainController" layout="row" layout-align="space-between center"> <span>Weaved<b>In</b></span>
+                <!--            <span flex></span>-->
+                <div flex="40" layout="row" class="searchBar">
+                    <md-button ng-if="searchTaskTitle" ng-click="clearSearch()" class="md-icon-button">
+                        <md-icon>close</md-icon>
+                        <md-tooltip>clear search</md-tooltip>
+                    </md-button>
+                    <form ng-submit="search()">
+                        <md-input-container class="md-block">
+                            <label>Search Task</label>
+                            <input ng-model="searchTaskTitle"> 
+                        </md-input-container>
+                    </form>
+                    
+                    <md-button ng-click="search()" class="md-icon-button">
+                        <md-icon>search</md-icon>
+                        <md-tooltip>Click to search</md-tooltip>
+                    </md-button>
+                </div>
+                <md-button class="" ng-click="openNewModal()">
+                    <md-icon>add</md-icon> New Task</md-button>
+            </div>
+        </div>
+    </md-toolbar>
+    <!-- Application Content -->
+    <md-content layout="row" class="tasksContent" ui-view></md-content>
+    <script type="text/javascript" src="js/vendor.js" defer></script>
+    <script type="text/javascript" src="js/app.js" defer></script>
+</body>
+
+</html>

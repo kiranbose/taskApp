@@ -1,0 +1,36 @@
+<md-dialog flex="55">
+    <form class="newTaskForm" name="newTaskForm" ng-submit="save(task)" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New Task</h2> <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-contents style="overflow: auto">
+            <div class="md-dialog-content">
+                <div layout="row">
+                    <md-input-container flex="50">
+                        <label>Title</label>
+                        <input id="taskDatePicker" ng-model="task.title" type="text" class="form-control" id="taskTitle" name="taskTitle" placeholder="Title" ng-required="true" /> </md-input-container>
+                    <md-datepicker md-open-on-focus flex="30" flex-sm="100" ng-model="task.dueDate" md-min-date="minDate" md-placeholder="Task Due Date" ng-required="true" style="height: 50px; margin-top: 10px;"></md-datepicker>
+                </div>
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Description</label>
+                        <input id="taskDatePicker" ng-model="task.description" type="text" class="form-control" id="taskTitle" name="taskTitle" placeholder="Title" ng-required="true" /> </md-input-container>
+                </div>
+                <div layout="column" flex>
+                    <md-contact-chips flex ng-model="task.assignee" md-contacts="querySearch($query)" md-contact-name="displayName" md-contact-image="profilePic" md-contact-email="email" md-require-match="true" md-min-length="0" filter-selected="false" placeholder="Select assignees"> </md-contact-chips>
+                </div>
+            </div>
+        </md-dialog-contents>
+        <md-dialog-actions layout="row"> <span flex></span>
+            <md-button ng-click="cancel()" type="button"> Cancel </md-button>
+            <md-button class="md-primary" type="submit" ng-disabled="newTaskForm.$invalid || task.assignee.length<1" style="margin-right:20px;"> Create Task </md-button>
+        </md-dialog-actions>
+    </form>
+    
+    <div class="md-dialog-focus-trap" tabindex="0"></div>
+</md-dialog>
