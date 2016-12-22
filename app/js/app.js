@@ -34,10 +34,15 @@
     "use strict";
     var mainController = angular.module('main.controllers', []);
     mainController.controller('mainController', ['$rootScope', '$scope', '$window', 'taskHelper', '$mdDialog', '$mdToast', '$mdMedia', '$state', function ($rootScope, $scope, $window, taskHelper, $mdDialog, $mdToast, $mdMedia, $state) {
+//        main controller - controls the sections in home page
         $rootScope.dateFormat = "dd/mm/yyyy";
         $scope.usersObj = taskHelper.usersObj;
         $scope.taskList = taskHelper.tasksObj;
+        $scope.currentUser = taskHelper.currentUser;
         $mdToast.showSimple('Drag and drop tasks to switch status');
+        
+//        openNewModal function triggers opening a new modal with a new controller
+//        contents of the modal is in tasks.newModal.html
         $scope.openNewModal = function (evt) {
             $mdDialog.show({
                 parent: angular.element(document.body)
@@ -51,8 +56,18 @@
                     users: $scope.usersObj
                 }
             }).then(function (response) {
+//                logic to push the newly added task to the dom. if new task is assigned to user, add it to to do.
+//                else add it to delegated tasks
+                var ownTask = false;
+                angular.forEach(response.assignee,function(assignee){
+                   if (assignee ==  $scope.currentUser){
+                       ownTask = true;
+                   }
+                });
+                if(ownTask)
                 $scope.taskList.assigned.unshift(response);
-                $state.go(home);
+                else
+                $scope.taskList.delegated.unshift(response);
                 $mdToast.showSimple('New Task Created');
             });
         }
@@ -62,7 +77,6 @@
         }
 //        function to search for tasks with title and description
         $scope.search = function () {
-            //            $scope.dummy = angular.copy($scope.taskList);
             for (var key in $scope.taskList) {
                 var obj = $scope.taskList[key];
                 obj = obj.map(function (item) {
@@ -88,8 +102,8 @@
         }
     }]);
     mainController.controller('newTaskController', ['$scope', '$rootScope', '$mdToast', 'users', '$q', 'taskHelper', '$mdDialog', '$filter', function ($scope, $rootScope, $mdToast, users, $q, taskHelper, $mdDialog, $filter) {
+//       controller of the new tasks modal
         $scope.usersObj = users.map(function (user) {
-            //                    user.displayName = user.displayName.toLowerCase();
             user._lowername = user.displayName.toLowerCase();
             return user;
         });
@@ -143,7 +157,9 @@
     var taskHelper = angular.module("task.helper", []);
     taskHelper.service("taskHelper", 
         ['$rootScope',function ($rootScope) {
+//            helper service - to feed static data into the app.
         var $scope = this;
+//            array of users
         $scope.usersObj = [
          {
           displayName: "user",  
@@ -214,9 +230,19 @@
           displayName: "owewewe",  
           email: "owewewe@weavedIn.com",  
           profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
+         },
+         {
+          displayName: "jose",  
+          email: "jose@weavedIn.com",  
+          profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
+         },
+         {
+          displayName: "k9",  
+          email: "k9@weavedIn.com",  
+          profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
          }
         ];
-                       
+//        aray of tasks - dynamic - tasks can be added    
         $scope.tasksObj ={
             assigned: [
                 {

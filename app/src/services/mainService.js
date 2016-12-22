@@ -3,7 +3,9 @@
     var taskHelper = angular.module("task.helper", []);
     taskHelper.service("taskHelper", 
         ['$rootScope',function ($rootScope) {
+//            helper service - to feed static data into the app.
         var $scope = this;
+//            array of users
         $scope.usersObj = [
          {
           displayName: "user",  
@@ -74,9 +76,19 @@
           displayName: "owewewe",  
           email: "owewewe@weavedIn.com",  
           profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
+         },
+         {
+          displayName: "jose",  
+          email: "jose@weavedIn.com",  
+          profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
+         },
+         {
+          displayName: "k9",  
+          email: "k9@weavedIn.com",  
+          profilePic: "http://i304.photobucket.com/albums/nn190/lordmyx/mymanga.jpg"  
          }
         ];
-                       
+//        aray of tasks - dynamic - tasks can be added    
         $scope.tasksObj ={
             assigned: [
                 {

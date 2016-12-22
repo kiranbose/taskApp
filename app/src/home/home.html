@@ -1,7 +1,6 @@
-
+<!--this file contains the body section of the app. 5 columns and draggable tasks are below-->
 <div layout="column" flex ng-if="! isLoading" style="overflow-y: hidden;" >
 
-<!--    <div ng-include="'src/platform_modules/tasks/views/partials/_task_filter_chips.html'"></div>-->
     <div class="taskDraggable taskListContainer" layout="row" layout-padding layout-margin layout-fill>
         <div class="taskList" layout="column" flex="20" ui-tree id="taskList.assigned-root">
             <div class="taskListToolbar">
@@ -10,6 +9,7 @@
             <div  class="tree-container" ui-tree-nodes="" ng-model="taskList.assigned">
                 <md-card class="taskCardDraggable taskListCard pick btn btn-info btn-draggable" ng-mouseover="clearNewStat(task)" ng-repeat="task in (taskList.assigned | filter:{title: searchTaskTitle}) track by $index " ng-class="{newTaskCard: task.isNew}" style="font-size:12px;" ng-show="task.title" ui-tree-node ui-tree-handle ng-hide="task.hide">
                     <md-card-content style="padding:2px !important;">
+<!--                       content of individual card - code is present in taskCard.html-->
                         <ng-include src="'./src/home/taskCard.html'"> </ng-include>
                     </md-card-content>
                 </md-card>
